@@ -3,7 +3,7 @@ const prisma = require("../lib/prisma");
 
 const getPost = async (req, res) =>{
     const id = req.params.id;
-    console.log(id);
+    // console.log(id);
 
     try{
         const post = await prisma.post.findUnique({
@@ -28,8 +28,25 @@ const getPosts = async (req, res) =>{
     }
 }
 
+
+const getCategoryPosts = async (req, res)=>{
+    const category = req.query.category;
+    
+    try{
+        const posts = await prisma.post.findMany({
+            where:{
+                category: category
+            }
+        })
+              
+        res.status(200).json(posts);
+    } catch(err){
+        res.status(500).json({message: "Failed to fetch the posts!"});
+    }
+}
+
 const addPost = async (req, res) =>{
-    const {title, content, excerpt, image, postedBy, userId} = req.body;
+    const {title, content, excerpt, image, postedBy, userId, category} = req.body;
     // console.log(req.body);
 
     try{
@@ -40,7 +57,8 @@ const addPost = async (req, res) =>{
                 excerpt,
                 image,
                 postedBy,
-                userId
+                userId,
+                category
             }
         })
 
@@ -86,7 +104,7 @@ const deletePost = async (req, res) =>{
 
 const updatePost = async (req, res) =>{
     const id = req.params.id;
-    const {title, content, excerpt, image} = req.body;
+    const {title, content, excerpt, image, category} = req.body;
 
     try{
         const post = await prisma.post.update({
@@ -97,7 +115,8 @@ const updatePost = async (req, res) =>{
                 title,
                 content,
                 excerpt,
-                image
+                image,
+                category
             }
         })
 
@@ -107,4 +126,4 @@ const updatePost = async (req, res) =>{
     }
 }
 
-module.exports = {getPost, getPosts, addPost, profilePosts, deletePost, updatePost}
+module.exports = {getPost, getPosts, getCategoryPosts, addPost, profilePosts, deletePost, updatePost}

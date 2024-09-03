@@ -4,6 +4,7 @@ const controllers = require("../controllers/post.controller");
 
 router.get("/:id", controllers.getPost);
 router.get("/", controllers.getPosts);
+router.get("/category/posts", controllers.getCategoryPosts);
 router.get("/profile/:id", controllers.profilePosts);
 router.post("/add", controllers.addPost);
 router.delete("/delete/:id", controllers.deletePost);

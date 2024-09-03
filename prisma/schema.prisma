@@ -21,6 +21,7 @@ model Post{
   image String?
   postedBy String
   userId String 
+  category String?
 }
 
 model RegisteredUser{
