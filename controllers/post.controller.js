@@ -31,7 +31,7 @@ const getPosts = async (req, res) =>{
 
 const getCategoryPosts = async (req, res)=>{
     const category = req.query.category;
-    
+    console.log(category);
     try{
         const posts = await prisma.post.findMany({
             where:{
@@ -41,7 +41,7 @@ const getCategoryPosts = async (req, res)=>{
               
         res.status(200).json(posts);
     } catch(err){
-        res.status(500).json({message: "Failed to hhhhhthe posts!"});
+        res.status(500).json({message: "Failed to fetch the posts!"});
     }
 }
 
