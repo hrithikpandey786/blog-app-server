@@ -31,7 +31,7 @@ const getPosts = async (req, res) =>{
 
 const getCategoryPosts = async (req, res)=>{
     const category = req.query.category;
-    console.log(category);
+    // console.log(category);
     try{
         const posts = await prisma.post.findMany({
             where:{
