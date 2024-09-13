@@ -22,6 +22,7 @@ model Post{
   postedBy String
   userId String 
   category String?
+  likes String[]
 }
 
 model RegisteredUser{

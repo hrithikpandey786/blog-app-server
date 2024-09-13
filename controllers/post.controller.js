@@ -59,7 +59,8 @@ const addPost = async (req, res) =>{
                 image,
                 postedBy,
                 userId,
-                category
+                category,
+                likes: [""]
             }
         })
 
@@ -105,8 +106,11 @@ const deletePost = async (req, res) =>{
 
 const updatePost = async (req, res) =>{
     const id = req.params.id;
-    const {title, content, excerpt, image, category} = req.body;
-
+    const {title, content, category, likes, image} = req.body;
+    
+    // const image = req.body.image || "";
+    console.log(image);
+    // console.log(likes);
     try{
         const post = await prisma.post.update({
             where:{
@@ -115,9 +119,9 @@ const updatePost = async (req, res) =>{
             data:{
                 title,
                 content,
-                excerpt,
                 image,
-                category
+                category,
+                likes
             }
         })
 
