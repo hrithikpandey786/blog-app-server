@@ -109,7 +109,6 @@ const updatePost = async (req, res) =>{
     const {title, content, category, likes, image} = req.body;
     
     // const image = req.body.image || "";
-    console.log(image);
     // console.log(likes);
     try{
         const post = await prisma.post.update({

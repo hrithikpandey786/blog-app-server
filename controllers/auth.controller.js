@@ -78,12 +78,11 @@ const login = async (req, res) =>{
 // }
 
 const logout = (req, res)=>{
-    const token = req.cookies;
     
     try{
         return res.clearCookie("token").status(200).json({message: "deleted"});
     } catch(err){
-        console.log(err);
+        res.status(500).json({message: "Failed to lagout!"});
     }
 }
 
@@ -92,7 +91,7 @@ const updateProfile = async (req, res) =>{
     const {name, email, password, avatar} = req.body;
     const saltRound = 10;
     const {id} = req.params;
-    console.log(req.body, id);
+    
     try{
 
         const hashedPassword = await bcrypt.hash(password, saltRound);
